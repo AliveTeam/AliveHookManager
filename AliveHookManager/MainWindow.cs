@@ -48,42 +48,56 @@ namespace AliveHookManager
 
                 for (int i = 0; i < listBoxFunctions.Items.Count; i++)
                 {
-                    if (existingFuncs.Contains(((LinkerMapParser.LinkerMapFunction)listBoxFunctions.Items[i]).Address.ToString("X")))
+                    var func = ((LinkerMapParser.LinkerMapFunction)listBoxFunctions.Items[i]);
+                    if (existingFuncs.Contains(func.Address.ToString("X")))
                         listBoxFunctions.SetSelected(i, true);
                 }
             }
+
+            UpdateStatsLabel();
         }
+
+        List<int> previousSelectedGroupInds = new List<int>();
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ignoreGroupChange)
-                return;
-
-            listBoxFunctions.SelectedItems.Clear();
-
-            List<LinkerMapParser.LinkerMapFunction> selectedFunctions = new List<LinkerMapParser.LinkerMapFunction>();
-
-            foreach(var o in listBoxFunctions.Items)
+            if (!ignoreGroupChange)
             {
-                LinkerMapParser.LinkerMapFunction func = (LinkerMapParser.LinkerMapFunction)o;
-                var selectedObjects = new List<object>();
-                foreach (var l in listBoxGroups.SelectedItems)
-                    selectedObjects.Add(l);
-
-                foreach (var l in listBoxGroups.Items)
+                List<int> removedInds = new List<int>();
+                foreach(var i in previousSelectedGroupInds)
                 {
-                    if (selectedObjects.Contains(l) && func.Object == (string)l)
+                    if (!listBoxGroups.SelectedIndices.Contains(i))
+                        removedInds.Add(i);
+                }
+                List<int> newInds = new List<int>();
+                foreach (var i in listBoxGroups.SelectedIndices)
+                    newInds.Add((int)i);
+                foreach (var i in previousSelectedGroupInds)
+                    newInds.Remove(i);
+
+                newInds.AddRange(removedInds.ToArray());
+                
+                foreach(var i in newInds)
+                {
+                    bool selected = listBoxGroups.GetSelected(i);
+                    string groupName = (string)listBoxGroups.Items[i];
+
+                    for (int x = 0; x < listBoxFunctions.Items.Count; x++)
                     {
-                        selectedFunctions.Add(func);
-                        break;
+                        LinkerMapParser.LinkerMapFunction func = (LinkerMapParser.LinkerMapFunction)listBoxFunctions.Items[x];
+
+                        if (func.Object == groupName)
+                            listBoxFunctions.SetSelected(x, selected);
                     }
+                    
                 }
             }
 
-            foreach(var o in selectedFunctions)
-            {
-                listBoxFunctions.SelectedItems.Add(o);
-            }
+            previousSelectedGroupInds.Clear();
+            foreach (var i in listBoxGroups.SelectedIndices)
+                previousSelectedGroupInds.Add((int)i);
+
+            UpdateStatsLabel();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -123,6 +137,42 @@ namespace AliveHookManager
             ignoreGroupChange = false;
             for (int i = 0; i < listBoxFunctions.Items.Count; i++)
                 listBoxFunctions.SetSelected(i, false);
+        }
+
+        void UpdateSelectedGroups()
+        {
+            for (int i = 0; i < listBoxGroups.Items.Count; i++)
+            {
+                string groupName = (string)listBoxGroups.Items[i];
+
+                bool foundFunc = false;
+
+                foreach(var f in listBoxFunctions.SelectedItems)
+                {
+                    LinkerMapParser.LinkerMapFunction func = (LinkerMapParser.LinkerMapFunction)f;
+
+                    if (func.Object == groupName)
+                    {
+                        foundFunc = true;
+                        break;
+                    }
+                }
+
+                ignoreGroupChange = true;
+                listBoxGroups.SetSelected(i, foundFunc);
+                ignoreGroupChange = false;
+            }
+        }
+
+        private void listBoxFunctions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateSelectedGroups();
+            UpdateStatsLabel();
+        }
+
+        void UpdateStatsLabel()
+        {
+            label2.Text = $"{listBoxFunctions.SelectedItems.Count}/{listBoxFunctions.Items.Count} functions disabled";
         }
     }
 }
