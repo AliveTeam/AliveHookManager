@@ -17,6 +17,7 @@ namespace AliveHookManager
         {
             public string Name { get; set; }
             public string Object { get; set; }
+            public int Address { get; set; }
 
             public override string ToString()
             {
@@ -53,7 +54,7 @@ namespace AliveHookManager
                             string functionObject = funcObjectSplit.Last().Split('.').First();
 
                             if (funcObjectSplit.First() == "AliveLib")
-                                Functions.Add(new LinkerMapFunction() { Name = funcName, Object = functionObject });
+                                Functions.Add(new LinkerMapFunction() { Name = funcName, Object = functionObject, Address = address });
                         }
                     }
                 }
