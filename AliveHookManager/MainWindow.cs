@@ -21,8 +21,22 @@ namespace AliveHookManager
         LinkerMapParser mParser = new LinkerMapParser();
         bool ignoreGroupChange = false;
 
+        void SuspendLists()
+        {
+            listBoxFunctions.SuspendLayout();
+            listBoxGroups.SuspendLayout();
+        }
+
+        void ResumeLists()
+        {
+            listBoxFunctions.ResumeLayout();
+            listBoxGroups.ResumeLayout();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            SuspendLists();
+
             if (!File.Exists("AliveDll.map"))
             {
                 MessageBox.Show("AliveDll.map not found. Make sure to put this app into the game directory.", "AliveDll.map not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -54,6 +68,8 @@ namespace AliveHookManager
                 }
             }
 
+            ResumeLists();
+
             UpdateStatsLabel();
         }
 
@@ -61,6 +77,8 @@ namespace AliveHookManager
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SuspendLists();
+
             if (!ignoreGroupChange)
             {
                 List<int> removedInds = new List<int>();
@@ -98,16 +116,22 @@ namespace AliveHookManager
                 previousSelectedGroupInds.Add((int)i);
 
             UpdateStatsLabel();
+
+            ResumeLists();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            SuspendLists();
+
             ignoreGroupChange = true;
             for (int i = 0; i < listBoxGroups.Items.Count; i++)
                 listBoxGroups.SetSelected(i, true);
             ignoreGroupChange = false;
             for (int i = 0; i < listBoxFunctions.Items.Count; i++)
                 listBoxFunctions.SetSelected(i, true);
+
+            ResumeLists();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -131,16 +155,22 @@ namespace AliveHookManager
 
         private void button3_Click(object sender, EventArgs e)
         {
+            SuspendLists();
+
             ignoreGroupChange = true;
             for (int i = 0; i < listBoxGroups.Items.Count; i++)
                 listBoxGroups.SetSelected(i, false);
             ignoreGroupChange = false;
             for (int i = 0; i < listBoxFunctions.Items.Count; i++)
                 listBoxFunctions.SetSelected(i, false);
+
+            ResumeLists();
         }
 
         void UpdateSelectedGroups()
         {
+            SuspendLists();
+
             for (int i = 0; i < listBoxGroups.Items.Count; i++)
             {
                 string groupName = (string)listBoxGroups.Items[i];
@@ -162,6 +192,8 @@ namespace AliveHookManager
                 listBoxGroups.SetSelected(i, foundFunc);
                 ignoreGroupChange = false;
             }
+
+            ResumeLists();
         }
 
         private void listBoxFunctions_SelectedIndexChanged(object sender, EventArgs e)
