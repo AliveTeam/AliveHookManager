@@ -281,5 +281,11 @@ namespace AliveHookManager
             SaveDisabledFunctions();
             LaunchGame("-debug");
         }
+
+        private void fixedFloatUtilToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FixedFloatHelper helper = new FixedFloatHelper();
+            helper.Show();
+        }
     }
 }

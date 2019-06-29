@@ -42,6 +42,8 @@
             this.toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonSaveLaunch = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonSaveLaunchDebug = new System.Windows.Forms.ToolStripButton();
             this.contextMenuStripListSingle = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.enableGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.disableGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,8 +52,8 @@
             this.disableSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelFuncs = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripButtonSaveLaunchDebug = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.fixedFloatUtilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStripListSingle.SuspendLayout();
             this.contextMenuStripListMulti.SuspendLayout();
@@ -163,6 +165,21 @@
             this.toolStripButtonSaveLaunch.Text = "Save + Launch";
             this.toolStripButtonSaveLaunch.Click += new System.EventHandler(this.toolStripButtonSaveLaunch_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonSaveLaunchDebug
+            // 
+            this.toolStripButtonSaveLaunchDebug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonSaveLaunchDebug.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSaveLaunchDebug.Image")));
+            this.toolStripButtonSaveLaunchDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSaveLaunchDebug.Name = "toolStripButtonSaveLaunchDebug";
+            this.toolStripButtonSaveLaunchDebug.Size = new System.Drawing.Size(145, 22);
+            this.toolStripButtonSaveLaunchDebug.Text = "Save + Launch + Console";
+            this.toolStripButtonSaveLaunchDebug.Click += new System.EventHandler(this.toolStripButtonSaveLaunchDebug_Click);
+            // 
             // contextMenuStripListSingle
             // 
             this.contextMenuStripListSingle.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -210,6 +227,7 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSplitButton1,
             this.toolStripStatusLabelFuncs});
             this.statusStrip1.Location = new System.Drawing.Point(0, 428);
             this.statusStrip1.Name = "statusStrip1";
@@ -225,20 +243,23 @@
             this.toolStripStatusLabelFuncs.Size = new System.Drawing.Size(119, 17);
             this.toolStripStatusLabelFuncs.Text = "toolStripStatusLabel1";
             // 
-            // toolStripButtonSaveLaunchDebug
+            // toolStripSplitButton1
             // 
-            this.toolStripButtonSaveLaunchDebug.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButtonSaveLaunchDebug.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSaveLaunchDebug.Image")));
-            this.toolStripButtonSaveLaunchDebug.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonSaveLaunchDebug.Name = "toolStripButtonSaveLaunchDebug";
-            this.toolStripButtonSaveLaunchDebug.Size = new System.Drawing.Size(145, 22);
-            this.toolStripButtonSaveLaunchDebug.Text = "Save + Launch + Console";
-            this.toolStripButtonSaveLaunchDebug.Click += new System.EventHandler(this.toolStripButtonSaveLaunchDebug_Click);
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fixedFloatUtilToolStripMenuItem});
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(54, 20);
+            this.toolStripSplitButton1.Text = "Utility";
             // 
-            // toolStripSeparator4
+            // fixedFloatUtilToolStripMenuItem
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            this.fixedFloatUtilToolStripMenuItem.Name = "fixedFloatUtilToolStripMenuItem";
+            this.fixedFloatUtilToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.fixedFloatUtilToolStripMenuItem.Text = "Fixed Float Helper";
+            this.fixedFloatUtilToolStripMenuItem.Click += new System.EventHandler(this.fixedFloatUtilToolStripMenuItem_Click);
             // 
             // ManagerV2
             // 
@@ -287,5 +308,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFuncs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButtonSaveLaunchDebug;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripMenuItem fixedFloatUtilToolStripMenuItem;
     }
 }

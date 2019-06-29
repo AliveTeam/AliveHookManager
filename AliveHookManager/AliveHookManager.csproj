@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FixedFloatHelper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FixedFloatHelper.Designer.cs">
+      <DependentUpon>FixedFloatHelper.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +71,9 @@
     <Compile Include="ToolStripTextBoxNew.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="FixedFloatHelper.resx">
+      <DependentUpon>FixedFloatHelper.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
