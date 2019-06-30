@@ -287,5 +287,49 @@ namespace AliveHookManager
             FixedFloatHelper helper = new FixedFloatHelper();
             helper.Show();
         }
+
+        private void toolStripButton_clear_funcs_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listViewFunctions.Items)
+            {
+                AbeFunction abeFunc = (AbeFunction)item.Tag;
+
+                abeFunc.Disabled = true;
+                item.Checked = true;
+            }
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(GetSelectedFunction().LinkerFunc.Name);
+        }
+
+        private void copySelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string copy = "";
+
+            foreach (ListViewItem item in listViewFunctions.SelectedItems)
+            {
+                AbeFunction abeFunc = (AbeFunction)item.Tag;
+
+                abeFunc.Disabled = false;
+                item.Checked = false;
+
+                copy += abeFunc.LinkerFunc.Name + "\n";
+            }
+
+            Clipboard.SetText(copy);
+        }
+
+        private void toolStripButton_enableall_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listViewFunctions.Items)
+            {
+                AbeFunction abeFunc = (AbeFunction)item.Tag;
+
+                abeFunc.Disabled = false;
+                item.Checked = false;
+            }
+        }
     }
 }
