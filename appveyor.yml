@@ -10,7 +10,7 @@ build_script:
  - msbuild AliveHookManager.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /m
 
 artifacts:
- - path: '**\*.exe'
+ - path: '**\bin\Release\*.exe'
    name: AliveHookManager-$(configuration)-$(APPVEYOR_REPO_COMMIT)
 
 test: off
