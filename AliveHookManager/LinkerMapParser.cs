@@ -55,7 +55,7 @@ namespace AliveHookManager
 
                             var lowerFunc = funcName.ToLower();
                             var sym = funcObjectSplit.First().ToLower();
-                            if (sym.Contains("alivelib") && !lowerFunc.StartsWith("_unwind") && !lowerFunc.StartsWith("_ehhandler") && !lowerFunc.StartsWith("?__"))
+                            if (!lowerFunc.StartsWith("_")  && !lowerFunc.StartsWith("?"))
                             {
                                 Functions.Add(new LinkerMapFunction() { Name = funcName, Object = functionObject, Address = address });
                             }
