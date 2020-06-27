@@ -53,8 +53,10 @@ namespace AliveHookManager
                             string[] funcObjectSplit = funcSplit.Last().Split(':');
                             string functionObject = funcObjectSplit.Last().Split('.').First();
 
-                            if (funcObjectSplit.First() == "AliveLib")
+                            if (funcObjectSplit.First().ToLower().Contains("alivelib"))
+                            {
                                 Functions.Add(new LinkerMapFunction() { Name = funcName, Object = functionObject, Address = address });
+                            }
                         }
                     }
                 }
