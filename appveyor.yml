@@ -1,18 +1,13 @@
 version: 1.0.{build}
 
-platform: 
- - "Any CPU"
-
 configuration:
  - Release
 
 clone_folder: c:\AliveHookManager
 
 build_script:
- - cd c:\AliveHookManager
- - echo %platform%
- - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x64
- - msbuild c:\AliveHookManager\AliveHookManager.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /m
+ - cd c:\AliveHookManager\AliveHookManager
+ - msbuild AliveHookManager.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /m
 
 artifacts:
  - path: '**\*.exe'
