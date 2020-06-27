@@ -71,24 +71,36 @@ namespace AliveHookManager
             Show();
         }
 
-        void LoadLinkerData()
+        bool LoadLinkerMap(string fileName)
         {
-            LinkerMapParser mParser = new LinkerMapParser();
-
-            if (!File.Exists("AliveDll.map"))
+            if (!File.Exists(fileName))
             {
-                MessageBox.Show("AliveDll.map not found. Make sure to put this app into the game directory.", "AliveDll.map not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
+                return false;
             }
 
-            mParser.Parse(File.ReadAllText("AliveDll.map"));
+            LinkerMapParser parser = new LinkerMapParser();
+            parser.Parse(File.ReadAllText(fileName));
 
             mAbeFuncs.Clear();
 
-            foreach (var f in mParser.Functions)
+            foreach (var f in parser.Functions)
             {
                 mAbeFuncs.Add(new AbeFunction() { LinkerFunc = f, Disabled = false });
             }
+            return true;
+        }
+
+        void LoadLinkerData()
+        {
+            if (!LoadLinkerMap("AliveDllAO.map"))
+            {
+                if (!LoadLinkerMap("AliveDllAE.map"))
+                {
+                    MessageBox.Show($"AliveDllAO.map nor AliveDllAE.map was found. Make sure to put this app into the game directory.", $"No linker maps found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
+            }
+
         }
 
         private void ManagerV2_Load(object sender, EventArgs e)

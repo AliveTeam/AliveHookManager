@@ -1,0 +1,27 @@
+version: 1.0.{build}
+
+platform: 
+ - "Any CPU"
+
+configuration:
+ - Release
+
+clone_folder: c:\AliveHookManager
+
+build_script:
+ - mkdir build
+ - cd build
+ - echo %platform%
+ - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %platform%
+- msbuild AliveHookManager.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /m
+
+install:
+ - git submodule update --init --recursive
+ - ps: Start-FileDownload 'https://www.libsdl.org/release/SDL2-devel-2.0.9-VC.zip'
+ - 7z x SDL2-devel-2.0.9-VC.zip
+
+artifacts:
+ - path: '**\*.exe'
+   name: AliveHookManager-$(configuration)-$(APPVEYOR_REPO_COMMIT)
+
+test: off
