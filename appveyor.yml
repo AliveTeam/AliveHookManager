@@ -13,7 +13,7 @@ build_script:
  - cd build
  - echo %platform%
  - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %platform%
-- msbuild AliveHookManager.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /m
+ - msbuild AliveHookManager.sln /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll" /m
 
 install:
  - git submodule update --init --recursive
