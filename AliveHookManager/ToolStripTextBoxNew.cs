@@ -51,7 +51,7 @@ namespace AliveHookManager
 
         bool mPlaceholderShowing = false;
 
-        public override string Text { get => (mPlaceholderShowing) ? "" : base.Text; set => base.Text = value; }
+        public override string Text { get { return (mPlaceholderShowing) ? "" : base.Text; }  set { base.Text = value; } }
         public string Placeholder { get; set; }
     }
 }
