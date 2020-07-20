@@ -46,7 +46,7 @@ namespace AliveHookManager
                         int firstAtIndex = funcName.IndexOf('@');
                         funcName = funcName.Substring(0, (firstAtIndex != -1) ? firstAtIndex : funcName.Length);
 
-                        string[] nameSplit = funcName.Split(new char[] { '_' },  StringSplitOptions.RemoveEmptyEntries);
+                        string[] nameSplit = funcName.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
                         int address = 0;
                         if (int.TryParse(nameSplit.Last(), System.Globalization.NumberStyles.HexNumber, null, out address) && address > 0x400000)
                         {
@@ -55,7 +55,7 @@ namespace AliveHookManager
 
                             var lowerFunc = funcName.ToLower();
                             var sym = funcObjectSplit.First().ToLower();
-                            if (!lowerFunc.StartsWith("_")  && !lowerFunc.StartsWith("?"))
+                            if (!lowerFunc.StartsWith("_") && !lowerFunc.StartsWith("?"))
                             {
                                 Functions.Add(new LinkerMapFunction() { Name = funcName, Object = functionObject, Address = address });
                             }
