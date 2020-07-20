@@ -65,7 +65,24 @@ namespace AliveHookManager
 
         void LaunchGame(string args)
         {
-            Process p = Process.Start("Exoddus_NoStubs.exe", args);
+            Process p;
+
+            if (File.Exists("Exoddus_AliveDllAE.exe"))
+            {
+                p = Process.Start("Exoddus_AliveDllAE.exe", args);
+            }
+
+            else if (File.Exists("AbeWin_AliveDllAO.exe"))
+            {
+                p = Process.Start("AbeWin_AliveDllAO.exe", args);
+            }
+
+            else
+            {
+                MessageBox.Show($"Exoddus_AliveDllAE.exe nor AbeWin_AliveDllAO.exe was found. Make sure to put this app into the game directory.", $"No executable found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             Hide();
             p.WaitForExit();
             Show();
